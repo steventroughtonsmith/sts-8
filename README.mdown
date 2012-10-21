@@ -1,0 +1,19 @@
+STS-8 VIRTUAL CPU
+=============
+
+
+[![](https://lh3.googleusercontent.com/-D5DxkZXvZXI/UINfa75EoXI/AAAAAAAAAz4/3Mtww9gJrls/s640/Screen%2520Shot%25202012-10-20%2520at%252019.34.34.png)](https://lh3.googleusercontent.com/-D5DxkZXvZXI/UINfa75EoXI/AAAAAAAAAz4/3Mtww9gJrls/s640/Screen%2520Shot%25202012-10-20%2520at%252019.34.34.png)
+
+
+WHAT IS THIS?
+=============
+
+This is a personal project (for fun) that I started after playing with Eloraam's 6502 emulator block in Minecraft; in the process of learning 6502 assembly I thought it would be a good idea to write my own 'CPU' so that I actually understood more of what was going on. Here lies the result.
+
+It's a project that builds for OS X and iPad; the core is built mostly in C but there is a lot of Objective-C too. I don't know much about how CPUs work, so I'm sure this is filled with bugs and bad logic; I built this to learn more, so let me know if I got anything super wrong! It doesn't [yet] have a purpose, but I guess someday I'd like to integrate this inside a game, like Eloraam's Red Power mod for Minecraft or Notch's own 0x10c.
+
+
+LICENSE
+=============
+
+You can use this for whatever you want, BSD-style. I'd really like to know if you use it for anything, or do anything cool with it, but you're under no obligation to provide your source changes (although that would make me a sad panda).
