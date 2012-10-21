@@ -13,6 +13,14 @@ This is a personal project (for fun) that I started after playing with Eloraam's
 It's a project that builds for OS X and iPad; the core is built mostly in C but there is a lot of Objective-C too. I don't know much about how CPUs work, so I'm sure this is filled with bugs and bad logic; I built this to learn more, so let me know if I got anything super wrong! It doesn't [yet] have a purpose, but I guess someday I'd like to integrate this inside a game, like Eloraam's Red Power mod for Minecraft or Notch's own 0x10c.
 
 
+HOW DO I USE IT?
+=============
+
+You can simply drag and drop the .s assembly files from the examples folder onto the app's main window, and it will assemble them on the fly and restart the CPU with them in memory. You'll probably want to start with stsos.s first, as it combines features from the other examples.
+
+The iPad version is a little more basic; it has the same core but no method of user input. More to come.
+
+
 LICENSE
 =============
 
