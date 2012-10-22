@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DRTMobileScreenView : UIView
+@interface DRTMobileScreenView : UIView <UIKeyInput, UITextInputTraits>
 
 @end

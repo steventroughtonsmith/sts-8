@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">12C50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1926</string>
+			<string key="NS.object.0">1929</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBNSLayoutConstraint</string>
@@ -146,8 +146,15 @@
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
-						<string type="base64-UTF8" key="IBUIText">bWFpbjoKCVggMAoJWSAwCmxvb3A6CglSWEEgbWVzc2FnZQoJVEFYCglJTkNYCglCWiBlbmQKCUIgbG9v
-cAoJCmVuZDoKCUhMVAoKbWVzc2FnZToKLmJ5dGUgIkhFTExPIFdPUkxEIg</string>
+						<string type="base64-UTF8" key="IBUIText">CmluaXQ6CglYIDAKCVkgMAoJSk1QIGluaXRfZG8KCm1haW46CgkKCUxEQSBfa2V5Ym9hcmQgOyBjaGVj
+ayBrZXkgaW5wdXQKCTsgY2hlY2sgZm9yIHJldHVybiBrZXkgMTMKCVNVQiAxMwoJQlogY3IKCUFERCAx
+MwoKCTsgYmFja3NwYWNlIDEyNwoJU1VCIDEyNwoJQlogYmtzcAoJQUREIDEyNwoKCUJaIG1haW4KCUJO
+IG1haW4KCVRBWAoJSU5DWAoJTEQgMjE5CglUQVgKCUIgbWFpbgoJSExUCgpjcjoKCUxEIDAKCVRBWAoJ
+SU5DWQoJWCAwCglMRCAyMTkgOyBjdXJzb3IgYmFyCglUQVgKCUIgbWFpbgoKYmtzcDoKCVBVU0gKCVRY
+QQoJU1VCIDEKCUJOIG1haW4KCUFERCAxCglQT1AKCTsgbW92ZSB0aGUgY3Vyc29yCglMRCAwCglUQVgK
+CURFQ1gKCUxEIDIxOSA7IGN1cnNvciBiYXIKCVRBWAoJQiBtYWluCgppbml0X2RvOgoJUlhBIGJvb3Rt
+c2cKCVRBWAoJSU5DWAoJQlogY3IKCUIgaW5pdF9kbwoJSExUCgpib290bXNnOgoJLmJ5dGUgIlNUUyBP
+UyAwMDEgTE9BREVEIgoJLnZhciAwA</string>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -951,6 +958,6 @@ cAoJCmVuZDoKCUhMVAoKbWVzc2FnZToKLmJ5dGUgIkhFTExPIFdPUkxEIg</string>
 			<string key="ScreenFrame.png">{782, 622}</string>
 		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>
-		<string key="IBCocoaTouchPluginVersion">1926</string>
+		<string key="IBCocoaTouchPluginVersion">1929</string>
 	</data>
 </archive>

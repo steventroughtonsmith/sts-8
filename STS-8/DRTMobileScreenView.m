@@ -116,4 +116,35 @@ NSMutableArray *charsetMap = nil;
 	
 }
 
+#pragma mark - Key Input
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	[self becomeFirstResponder];
+}
+
+-(BOOL)canBecomeFirstResponder
+{
+	return YES;
+}
+
+- (BOOL)hasText
+{
+	return YES;
+}
+
+- (void)insertText:(NSString *)text
+{	
+	if ([text characterAtIndex:0] == 10)
+		[[DRTCPU sharedInstance] setKey:13];
+	else
+	[[DRTCPU sharedInstance] setKey:[text characterAtIndex:0]];
+}
+
+- (void)deleteBackward
+{
+	[[DRTCPU sharedInstance] setKey:127];
+
+}
+
 @end
