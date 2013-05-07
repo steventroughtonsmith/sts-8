@@ -15,7 +15,7 @@ printUppercase:
 ; if (lastchar-'Z' >= 0)
 if_1: 
 	ST lastchar
-	SUB 91 ; 'Z'
+	SUB 90 ; 'Z'
 	BZ else_1
 	LDA lastchar ; restore char
 	ADD 1
@@ -31,7 +31,7 @@ printLowercase:
 ; if (lastchar-'z' >= 0)
 if_2: 
 	ST lastchar_2
-	SUB 123 ; 'z'
+	SUB 122 ; 'z'
 	BZ else_2
 	LDA lastchar_2 ; restore char
 	ADD 1

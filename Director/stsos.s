@@ -12,10 +12,19 @@ main:
 	BZ cr
 	ADD 13
 
+	; Y++ when X == screen width
+	PUSH
+	TXA
+	SUB 40
+	BZ cr
+	ADD 40
+	POP
+
 	; backspace 127
 	SUB 127
 	BZ bksp
 	ADD 127
+
 
 	BZ main
 	BN main
@@ -51,13 +60,49 @@ bksp:
 	B main
 
 init_do:
-	RXA bootmsg
-	TAX
-	INCX
-	BZ cr
-	B init_do
+	LD bootmsg
+	JMP print
+
+	JMP newline
+
+	LD email
+	JMP print
+
+	JMP newline
+	
+	B cr
 	HLT
 
+print:
+	ST print_storage
+print_loop:
+	LDA print_storage
+	RA
+	BZ print_end
+	TAX
+	INCX
+	; print_storage++
+	LDA print_storage
+	ADD 1
+	ST print_storage
+	B print_loop
+print_end:
+	LD 0
+	ST print_storage
+	RET
+
+newline:
+	INCY
+	X 0
+	RET
+
 bootmsg:
-	.byte "STS OS 001 LOADED"
-	.var 0
+	.byte "STS-OS 001: LOADED"
+	.byte 0
+
+email:
+	.byte "sts-8"
+	.byte 0
+
+print_storage:
+	.byte 0

@@ -55,13 +55,13 @@ NSMutableArray *charsetMap = nil;
 	charsetMap = [NSMutableArray arrayWithCapacity:3];
 	UIImage *charset = [UIImage imageNamed:@"charset.png"];
 	
-	for (int y = 25; y >= 0; y--)
+	for (int y = 0; y < 26; y++)
 	{
 		for (int x = 0; x < 26; x++)
 		{
 			CGPoint tileMapPosition = CGPointMake(x,y);
 
-				CGRect imageRect = CGRectMake((1+tileMapPosition.x*TILE_SIZE)+tileMapPosition.x, (1+tileMapPosition.y)+tileMapPosition.y*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+			CGRect imageRect = CGRectMake(tileMapPosition.x*TILE_SIZE, tileMapPosition.y*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 			UIGraphicsBeginImageContextWithOptions(CGSizeMake(TILE_SIZE, TILE_SIZE), YES, 1.0);
 			
 			

@@ -46,6 +46,7 @@
 		B02517FD15E967F80018034D /* helloworld.s in Resources */ = {isa = PBXBuildFile; fileRef = B02517FA15E9675E0018034D /* helloworld.s */; };
 		B03171CA15EA7B0600B75963 /* DRTScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B03171C915EA7B0600B75963 /* DRTScreenView.m */; };
 		B039BF9115EC1E1400146791 /* charset.png in Resources */ = {isa = PBXBuildFile; fileRef = B039BF9015EC1E1400146791 /* charset.png */; };
+		B08971861738B33200AE228B /* DRTCPU.m in Sources */ = {isa = PBXBuildFile; fileRef = B02517F415E950320018034D /* DRTCPU.m */; };
 		B0B17C4B15ECAC190069B13B /* DRTAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B17C4A15ECAC190069B13B /* DRTAssembler.m */; };
 		B0B17C5415ECAC520069B13B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B17C5315ECAC520069B13B /* Foundation.framework */; };
 		B0B17C5715ECAC520069B13B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B17C5615ECAC520069B13B /* main.m */; };
@@ -143,7 +144,9 @@
 		B03171C915EA7B0600B75963 /* DRTScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRTScreenView.m; sourceTree = "<group>"; };
 		B039BF9015EC1E1400146791 /* charset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charset.png; sourceTree = "<group>"; };
 		B051218016090E91006227AF /* keyinput.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = keyinput.s; sourceTree = "<group>"; };
+		B07F54821644DF3D0022DFFB /* pixels.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = pixels.s; sourceTree = "<group>"; };
 		B094DF1F16085D9F0015C088 /* alphabet.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = alphabet.s; sourceTree = "<group>"; };
+		B09F253D163509B400EFA6A1 /* snake.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = snake.s; sourceTree = "<group>"; wrapsLines = 0; };
 		B0B14B07160E896100F2894F /* stsos.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = stsos.s; sourceTree = "<group>"; };
 		B0B17C4915ECAC190069B13B /* DRTAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRTAssembler.h; sourceTree = "<group>"; };
 		B0B17C4A15ECAC190069B13B /* DRTAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRTAssembler.m; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 		B0BB0BA7161981BB00E563D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B0BB0BAA161981BB00E563D1 /* drtcc-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "drtcc-Prefix.pch"; sourceTree = "<group>"; };
 		B0BB0BAB161981BB00E563D1 /* drtcc.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = drtcc.1; sourceTree = "<group>"; };
+		B0E7AF951664D1ED00587C7F /* calc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = calc.s; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +338,9 @@
 				B094DF1F16085D9F0015C088 /* alphabet.s */,
 				B051218016090E91006227AF /* keyinput.s */,
 				B0B14B07160E896100F2894F /* stsos.s */,
+				B0E7AF951664D1ED00587C7F /* calc.s */,
+				B09F253D163509B400EFA6A1 /* snake.s */,
+				B07F54821644DF3D0022DFFB /* pixels.s */,
 			);
 			name = Examples;
 			sourceTree = "<group>";
@@ -575,6 +582,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0BB0BA8161981BB00E563D1 /* main.m in Sources */,
+				B08971861738B33200AE228B /* DRTCPU.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

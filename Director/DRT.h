@@ -13,7 +13,7 @@
 #define COLUMNS 40
 #define ROWS 30
 #define RAM_SIZE 1024
-#define STACK_SIZE 100
+#define STACK_SIZE 10000
 #define STARTADDR 100
 
 #define MAGIC 0xDB|0xF0<<8

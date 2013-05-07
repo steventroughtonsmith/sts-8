@@ -45,6 +45,7 @@
 
 -(void)keyDown:(NSEvent *)theEvent
 {
+//	NSLog(@"key = %i", [theEvent.characters UTF8String][0]);
 	[[DRTCPU sharedInstance] setKey:[theEvent.characters UTF8String][0]];
 }
 
@@ -83,17 +84,17 @@
 	
 	int offset = c;
 	
-	int y = 0;
+	int y = (416/TILE_SIZE)-1;
 	
 	while (offset >= 26)
 	{
 		offset -= 26;
-		y++;
+		y--;
 	}
 	
 	CGPoint tileMapPosition = CGPointMake(offset, y);
 	
-	NSRect imageRect = CGRectMake((1+tileMapPosition.x*TILE_SIZE)+tileMapPosition.x, (1+tileMapPosition.y)+tileMapPosition.y*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+	NSRect imageRect = CGRectMake(tileMapPosition.x*TILE_SIZE, tileMapPosition.y*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 	
 	[charset drawAtPoint:CGPointZero fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 }

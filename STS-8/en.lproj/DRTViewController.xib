@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<int key="IBDocument.SystemTarget">1552</int>
+		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1929</string>
+			<string key="NS.object.0">2083</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBNSLayoutConstraint</string>
@@ -45,7 +45,6 @@
 						<string key="NSFrameSize">{1024, 748}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="935438219">
 							<int key="NSColorSpace">3</int>
@@ -136,7 +135,6 @@
 						<string key="NSFrame">{{112, 852}, {800, 600}}</string>
 						<reference key="NSSuperview" ref="633471568"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -146,15 +144,23 @@
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
-						<string type="base64-UTF8" key="IBUIText">CmluaXQ6CglYIDAKCVkgMAoJSk1QIGluaXRfZG8KCm1haW46CgkKCUxEQSBfa2V5Ym9hcmQgOyBjaGVj
+						<object class="NSMutableString" key="IBUIText">
+							<bytes key="NS.bytes">CmluaXQ6CglYIDAKCVkgMAoJSk1QIGluaXRfZG8KCm1haW46CgkKCUxEQSBfa2V5Ym9hcmQgOyBjaGVj
 ayBrZXkgaW5wdXQKCTsgY2hlY2sgZm9yIHJldHVybiBrZXkgMTMKCVNVQiAxMwoJQlogY3IKCUFERCAx
-MwoKCTsgYmFja3NwYWNlIDEyNwoJU1VCIDEyNwoJQlogYmtzcAoJQUREIDEyNwoKCUJaIG1haW4KCUJO
-IG1haW4KCVRBWAoJSU5DWAoJTEQgMjE5CglUQVgKCUIgbWFpbgoJSExUCgpjcjoKCUxEIDAKCVRBWAoJ
-SU5DWQoJWCAwCglMRCAyMTkgOyBjdXJzb3IgYmFyCglUQVgKCUIgbWFpbgoKYmtzcDoKCVBVU0gKCVRY
-QQoJU1VCIDEKCUJOIG1haW4KCUFERCAxCglQT1AKCTsgbW92ZSB0aGUgY3Vyc29yCglMRCAwCglUQVgK
-CURFQ1gKCUxEIDIxOSA7IGN1cnNvciBiYXIKCVRBWAoJQiBtYWluCgppbml0X2RvOgoJUlhBIGJvb3Rt
-c2cKCVRBWAoJSU5DWAoJQlogY3IKCUIgaW5pdF9kbwoJSExUCgpib290bXNnOgoJLmJ5dGUgIlNUUyBP
-UyAwMDEgTE9BREVEIgoJLnZhciAwA</string>
+MwoKCTsgWSsrIHdoZW4gWCA9PSBzY3JlZW4gd2lkdGgKCVBVU0gKCVRYQQoJU1VCIDQwCglCWiBjcgoJ
+QUREIDQwCglQT1AKCgk7IGJhY2tzcGFjZSAxMjcKCVNVQiAxMjcKCUJaIGJrc3AKCUFERCAxMjcKCgoJ
+QlogbWFpbgoJQk4gbWFpbgoJVEFYCglJTkNYCglMRCAyMTkKCVRBWAoJQiBtYWluCglITFQKCmNyOgoJ
+TEQgMAoJVEFYCglJTkNZCglYIDAKCUxEIDIxOSA7IGN1cnNvciBiYXIKCVRBWAoJQiBtYWluCgpia3Nw
+OgoJUFVTSAoJVFhBCglTVUIgMQoJQk4gbWFpbgoJQUREIDEKCVBPUAoJOyBtb3ZlIHRoZSBjdXJzb3IK
+CUxEIDAKCVRBWAoJREVDWAoJTEQgMjE5IDsgY3Vyc29yIGJhcgoJVEFYCglCIG1haW4KCmluaXRfZG86
+CglMRCBib290bXNnCglKTVAgcHJpbnQKCglKTVAgbmV3bGluZQoKCUxEIGVtYWlsCglKTVAgcHJpbnQK
+CglKTVAgbmV3bGluZQoJCglCIGNyCglITFQKCnByaW50OgoJU1QgcHJpbnRfc3RvcmFnZQpwcmludF9s
+b29wOgoJTERBIHByaW50X3N0b3JhZ2UKCVJBCglCWiBwcmludF9lbmQKCVRBWAoJSU5DWAoJOyBwcmlu
+dF9zdG9yYWdlKysKCUxEQSBwcmludF9zdG9yYWdlCglBREQgMQoJU1QgcHJpbnRfc3RvcmFnZQoJQiBw
+cmludF9sb29wCnByaW50X2VuZDoKCUxEIDAKCVNUIHByaW50X3N0b3JhZ2UKCVJFVAoKbmV3bGluZToK
+CUlOQ1kKCVggMAoJUkVUCgpib290bXNnOgoJLmJ5dGUgIlNUUy1PUyAwMDE6IExPQURFRCIKCS5ieXRl
+IDAKCmVtYWlsOgoJLmJ5dGUgInN0cy04IgoJLmJ5dGUgMAoKcHJpbnRfc3RvcmFnZToKCS5ieXRlIDA</bytes>
+						</object>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -958,6 +964,6 @@ UyAwMDEgTE9BREVEIgoJLnZhciAwA</string>
 			<string key="ScreenFrame.png">{782, 622}</string>
 		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>
-		<string key="IBCocoaTouchPluginVersion">1929</string>
+		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

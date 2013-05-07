@@ -13,6 +13,8 @@
 
 Byte binary[RAM_SIZE];
 
+#define SINGLE_STEP 0
+#define DRT_DEBUG 0
 
 @implementation DRTCPU
 
@@ -36,6 +38,10 @@ typedef enum Operation
 
 -(void)setKey:(int)key
 {
+#if SINGLE_STEP
+	[self tick];
+	return;
+#endif
 	keyChar = key;
 }
 
@@ -56,6 +62,8 @@ typedef enum Operation
 		
 		MEMORY LOCATIONS
 		'_keyboard', or ram[0x1]
+	 
+		$X, $Y, $A
 		
 	*/
 	
@@ -98,7 +106,7 @@ typedef enum Operation
 	@"TAX" : @0x50, // transfer a to vram[x][y]
 	@"TXA" : @0x51, // transfer x to a
 	@"RXA" : @0x52, // transfer byte@operand+x to a
-	
+	@"RA" : @0x53, // transfer byte@a to a
 	
 	};
 }
@@ -182,12 +190,14 @@ typedef enum Operation
 		screen.vram[i] = 0;
 	}
 	
+#if !SINGLE_STEP
 	dispatch_async(dispatch_get_global_queue(0, 0), ^{
 		while (!halted)
 		{
 			[self tick];
 		}
 	});
+#endif
 }
 
 #define INSTR(x) [opcodes[[NSString stringWithFormat:@"%s", x]] isEqual:@(operation)]
@@ -202,17 +212,17 @@ uint64_t lastTick;
 	if (halted)
 		return;
 	
-	//	printf("tick; op = %X\n", operation);
-	
 	if (INSTR("TAX"))
 	{
 		screen.vram[(COLUMNS*(registers.y))+registers.x] = registers.accumulator;
 		registers.programCounter++;
-		
 	}
 	
 	if (INSTR("TXA"))
 	{
+#if DRT_DEBUG
+		printf("TXA] A = X(%i)\n", registers.x);
+#endif
 		registers.accumulator = registers.x;
 		registers.programCounter++;
 		
@@ -220,21 +230,41 @@ uint64_t lastTick;
 	
 	if (INSTR("RXA"))
 	{
+#if DRT_DEBUG
+		printf("RXA] A = ram[%i+X(%i)]:%i\n", operandm, registers.x, ram[operand+registers.x]);
+#endif
 		registers.accumulator = ram[operand+registers.x];
 		registers.programCounter+=2;
+	}
+	
+	
+	if (INSTR("RA"))
+	{
+#if DRT_DEBUG
+		printf("RA] A = ram[a]:%i\n", ram[registers.accumulator]);
+#endif
+		registers.accumulator = ram[registers.accumulator];
+		registers.programCounter++;
 	}
 	
 	/* Accumulator */
 	
 	if (INSTR("LD"))
 	{
+#if DRT_DEBUG
+		printf("LD] A = %X (%i)\n", operand, operand);
+#endif
 		registers.accumulator = operand;
 		registers.programCounter+=2;
 	}
 	
 	if (INSTR("LDA"))
 	{
-		if (operand == 0x01)
+#if DRT_DEBUG
+		printf("LDA] A = ram[%i]:%i\n", operand, ram[operand]);
+#endif
+		
+		if (operand == 0x1) // _keyboard
 		{
 			if (keyChar >= 0)
 			{
@@ -246,6 +276,18 @@ uint64_t lastTick;
 			
 			keyChar = -1;
 		}
+		else if (operand == 0x2) // $X
+		{
+			registers.accumulator = registers.x;
+			registers.programCounter+=2;
+
+		}
+		else if (operand == 0x3) // $Y
+		{
+			registers.accumulator = registers.y;
+			registers.programCounter+=2;
+
+		}
 		else
 		{
 			registers.accumulator = ram[operand];
@@ -255,8 +297,26 @@ uint64_t lastTick;
 	
 	if (INSTR("ST"))
 	{
+#if DRT_DEBUG
+		printf("ST] ram[%i] = A:%i\n", operand, registers.accumulator);
+#endif
+		if (operand == 0x2) // $X
+		{
+			registers.x = registers.accumulator;
+			registers.programCounter+=2;
+
+		}
+		else if (operand == 0x3) // $Y
+		{
+			registers.y = registers.accumulator;
+			registers.programCounter+=2;
+
+		}
+		else
+		{
 		ram[operand] = registers.accumulator;
 		registers.programCounter+=2;
+		}
 	}
 	
 	
@@ -264,10 +324,6 @@ uint64_t lastTick;
 	
 	if (INSTR("JMP"))
 	{
-		//		printf("JMP to %i\n", argument);
-		
-		
-		
 		registers.stackPointer--;
 		
 		if (registers.stackPointer < 0)
@@ -277,14 +333,24 @@ uint64_t lastTick;
 		}
 		
 		stack[registers.stackPointer] = registers.programCounter;
-		
-		printf("old pc = %i, new = %i\n", registers.programCounter, operand);
+#if DRT_DEBUG
+		printf("JMP] from %i to %i\n", registers.programCounter, operand);
+#endif
 		registers.programCounter = operand;
 		
 		/* ROM Routines */
 		
 		switch (operand) {
-			case 0xFE:
+			case 253:
+			{
+				printf("x: %i, y: %i\n", registers.x, registers.y);
+				
+				registers.programCounter = stack[registers.stackPointer]+2;
+				registers.stackPointer++;
+				
+				break;
+			}
+			case 254:
 			{
 				printf("STACK = \n");
 				
@@ -299,7 +365,7 @@ uint64_t lastTick;
 				break;
 			}
 				
-			case 0xFF:
+			case 255:
 			{
 				printf("ACC = %i\n", registers.accumulator);
 				
@@ -316,9 +382,9 @@ uint64_t lastTick;
 	
 	if (INSTR("RET"))
 	{
-		
-		printf("returning to = %i\n", stack[registers.stackPointer]);
-		
+#if DRT_DEBUG
+		printf("RET] back to = %i\n", stack[registers.stackPointer]);
+#endif
 		registers.programCounter = stack[registers.stackPointer]+2;
 		registers.stackPointer++;
 	}
@@ -328,6 +394,9 @@ uint64_t lastTick;
 	
 	if (INSTR("PUSH"))
 	{
+#if DRT_DEBUG
+		printf("PUSH]\n");
+#endif
 		registers.stackPointer--;
 		stack[registers.stackPointer] = registers.accumulator;
 		
@@ -336,6 +405,9 @@ uint64_t lastTick;
 	
 	if (INSTR("POP"))
 	{
+#if DRT_DEBUG
+		printf("POP] a = %i\n", stack[registers.stackPointer]);
+#endif
 		registers.accumulator = stack[registers.stackPointer];
 		registers.stackPointer++;
 		
@@ -346,12 +418,18 @@ uint64_t lastTick;
 	
 	if (INSTR("ADD"))
 	{
+#if DRT_DEBUG
+		printf("ADD] a += %i\n", operand);
+#endif
 		registers.accumulator = registers.accumulator + operand;
 		registers.programCounter+=2;
 	}
 	
 	if (INSTR("SUB"))
 	{
+#if DRT_DEBUG
+		printf("SUB] a -= %i\n", operand);
+#endif
 		registers.accumulator = registers.accumulator - operand;
 		registers.programCounter+=2;
 		
@@ -359,12 +437,18 @@ uint64_t lastTick;
 	
 	if (INSTR("MUL"))
 	{
+#if DRT_DEBUG
+		printf("MUL] a *= %i\n", operand);
+#endif
 		registers.accumulator = registers.accumulator * operand;
 		registers.programCounter+=2;
 	}
 	
 	if (INSTR("DIV"))
 	{
+#if DRT_DEBUG
+		printf("DIV] a /= %i\n", operand);
+#endif
 		registers.accumulator = registers.accumulator / operand;
 		registers.programCounter+=2;
 	}
@@ -373,11 +457,17 @@ uint64_t lastTick;
 	
 	if (INSTR("B"))
 	{
+#if DRT_DEBUG
+		printf("B] from %i to %i\n", registers.programCounter, operand);
+#endif
 		registers.programCounter = operand;
 	}
 	
 	if (INSTR("BP"))
 	{
+#if DRT_DEBUG
+		printf("BP] from %i to %i if a(%i) > 0\n", registers.programCounter, operand, registers.accumulator);
+#endif
 		if (registers.accumulator > 0)
 		{
 			registers.programCounter = operand;
@@ -388,6 +478,9 @@ uint64_t lastTick;
 	
 	if (INSTR("BN"))
 	{
+#if DRT_DEBUG
+		printf("BN] from %i to %i if a(%i) < 0\n", registers.programCounter, operand, registers.accumulator);
+#endif
 		if (registers.accumulator < 0)
 		{
 			registers.programCounter = operand;
@@ -398,6 +491,9 @@ uint64_t lastTick;
 	
 	if (INSTR("BZ"))
 	{
+#if DRT_DEBUG
+		printf("BZ] from %i to %i if a(%i) == 0\n", registers.programCounter, operand, registers.accumulator);
+#endif
 		if (registers.accumulator == 0)
 		{
 			registers.programCounter = operand;
@@ -411,7 +507,9 @@ uint64_t lastTick;
 	
 	if (INSTR("X"))
 	{
-		printf("load x = %i\n", operand);
+#if DRT_DEBUG
+		printf("X] x = %i\n", operand);
+#endif
 		registers.x = operand;
 		
 		registers.programCounter+=2;
@@ -419,12 +517,18 @@ uint64_t lastTick;
 	
 	if (INSTR("Y"))
 	{
+#if DRT_DEBUG
+		printf("Y] y = %i\n", operand);
+#endif
 		registers.y = operand;
 		registers.programCounter+=2;
 	}
 	
 	if (INSTR("INCX"))
 	{
+#if DRT_DEBUG
+		printf("INCX]");
+#endif
 		registers.x++;
 		registers.programCounter++;
 		
@@ -432,6 +536,9 @@ uint64_t lastTick;
 	
 	if (INSTR("DECX"))
 	{
+#if DRT_DEBUG
+		printf("DECX]");
+#endif
 		registers.x--;
 		registers.programCounter++;
 		
@@ -439,6 +546,9 @@ uint64_t lastTick;
 	
 	if (INSTR("INCY"))
 	{
+#if DRT_DEBUG
+		printf("INCY]");
+#endif
 		registers.y++;
 		registers.programCounter++;
 		
@@ -446,6 +556,9 @@ uint64_t lastTick;
 	
 	if (INSTR("DECY"))
 	{
+#if DRT_DEBUG
+		printf("DECY]");
+#endif
 		registers.y--;
 		registers.programCounter++;
 		
@@ -472,7 +585,7 @@ uint64_t lastTick;
 #if TARGET_CPU_ARM
 	
 #else
-	while (mach_absolute_time() <= lastTick+(NSEC_PER_MSEC))
+	while (mach_absolute_time() <= lastTick+(NSEC_PER_MSEC*2))
 	{
 	}
 #endif

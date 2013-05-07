@@ -13,5 +13,6 @@ end:
 
 message:
 .byte "HELLO WORLD"
+.byte 0
 
 	

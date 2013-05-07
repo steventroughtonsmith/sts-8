@@ -9,42 +9,13 @@
 #import "DRTAssembler.h"
 #import "DRTCPU.h"
 
+
+
 @implementation DRTAssembler
 
--(NSString *)_compileFile:(NSString *)source
+-(NSArray *)_componentsForLine:(NSString *)line
 {
-	NSDictionary *opcodes = [DRTCPU opcodes];
-	
-	Byte binary[4096];
-	
-	for (int i =0 ; i < 4096; i++)
-	{
-		binary[i] = 0;
-	}
-	
-	
-	
-	
-	NSString *code = [NSString stringWithContentsOfFile:source encoding:NSUTF8StringEncoding error:nil];
-	
-	NSMutableString *codeStripped = [NSMutableString stringWithCapacity:0];
-	
-	/* Strip comments */
-	[code enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-		if (![line hasPrefix:@";"] && ![line hasPrefix:@"//"])
-		{
-			NSRange cmtRange = [line rangeOfString:@";"];
-			if (cmtRange.length)
-			{
-				[codeStripped appendFormat:@"%@\n", [line substringToIndex:cmtRange.location]];
-			}
-			else
-				[codeStripped appendFormat:@"%@\n", line];
-			
-		}
-	}];
-	
-	NSArray *_components = [codeStripped componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	NSArray *_components = [line componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	
 	NSMutableArray *components = [NSMutableArray arrayWithCapacity:3];
 	
@@ -69,22 +40,69 @@
 		
 		if ([instruction hasSuffix:@"\""])
 		{
-
+			
 			_isInQuote = NO;
 			[components addObject:buffer];
 			continue;
 		}
 		
 		if (!_isInQuote)
+		{
 			[components addObject:instruction];
+		}
 		
 	}
 	
+	if (components.count)
+		return components;
+	else
+		return nil;
+}
+
+-(NSString *)_compileFile:(NSString *)source
+{
+	NSDictionary *opcodes = [DRTCPU opcodes];
 	
+	Byte binary[4096];
+	
+	for (int i =0 ; i < 4096; i++)
+	{
+		binary[i] = 0;
+	}
+	
+	NSString *code = [NSString stringWithContentsOfFile:source encoding:NSUTF8StringEncoding error:nil];
+	
+	NSMutableString *codeStripped = [NSMutableString stringWithCapacity:0];
+	
+	/* Strip comments */
+	[code enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+		if (![line hasPrefix:@";"] && ![line hasPrefix:@"//"])
+		{
+			NSRange cmtRange = [line rangeOfString:@";"];
+			if (cmtRange.length)
+			{
+				[codeStripped appendFormat:@"%@\n", [line substringToIndex:cmtRange.location]];
+			}
+			else
+				[codeStripped appendFormat:@"%@\n", line];
+			
+		}
+	}];
+	
+	/* Parse */
+	
+	NSMutableArray *components = [[NSMutableArray alloc] initWithCapacity:3];
+	
+	[codeStripped enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+		
+		NSArray *lineCmpts = [self _componentsForLine:line];
+		
+		if (lineCmpts.count)
+			[components addObjectsFromArray:lineCmpts];
+	}];
 	
 	NSMutableDictionary *jumps = [NSMutableDictionary dictionaryWithCapacity:3];
 	
-		
 	int i = STARTADDR;
 	
 	// one pass for jumps
@@ -98,11 +116,19 @@
 			continue;
 		}
 		
-		i++;
+		
+		if ([instruction hasPrefix:@"\""])
+		{
+			i+= instruction.length-3;
+		}
+		else
+			i++;
 	}
 	
 	/* ROM routines */
 	[jumps setObject:@(1) forKey:@"_keyboard"];
+	[jumps setObject:@(2) forKey:@"$X"];
+	[jumps setObject:@(3) forKey:@"$Y"];
 	
 	
 	i = STARTADDR;
@@ -117,27 +143,35 @@
 			continue;
 		}
 		
+		if ([instruction hasPrefix:@"\""])
+		{
+			continue;
+		}
 		
 		if ([instruction isEqualToString:@".byte"])
-		{
+		{		
 			NSString *byteVal = [components objectAtIndex:idx+1];
 			
-			
-			
-			byteVal = [byteVal substringWithRange:NSMakeRange(1, byteVal.length-2)];
-			
-			
-			NSLog(@"byecal = %@", byteVal);
-			
-			for (int m = 0; m < byteVal.length; m++)
+			if (![byteVal hasPrefix:@"\""])
 			{
-				binary[i] = [byteVal UTF8String][m];
+				binary[i] = [byteVal intValue];
 				i++;
 			}
-			
-//			binary[i] = 0;
-//	i++;
-			
+			else
+			{
+				//NSLog(@"Stripping string = %@", byteVal);
+				
+				byteVal = [byteVal substringWithRange:NSMakeRange(1, byteVal.length-3)];
+				
+				//NSLog(@"BYTES = %@", byteVal);
+				
+				for (int m = 0; m < byteVal.length; m++)
+				{
+					binary[i] = [byteVal UTF8String][m];
+					i++;
+				}
+			}
+
 			idx++;
 			
 			continue;
@@ -146,7 +180,7 @@
 		if ([instruction isEqualToString:@".var"])
 		{
 			NSString *byteVal = [components objectAtIndex:idx+1];
-									
+			
 			binary[i] = [byteVal UTF8String][0];
 			
 			idx++;
@@ -155,10 +189,11 @@
 			continue;
 		}
 		
-		NSLog(@"inst = %@", instruction);
 		
 		if ([[opcodes allKeys] containsObject:instruction])
 		{
+			//NSLog(@"[%i] = %@", i, instruction);
+			
 			binary[i] = (Byte)[opcodes[instruction] unsignedCharValue];
 		}
 		else
@@ -166,9 +201,16 @@
 			if ([[jumps allKeys] containsObject:instruction])
 			{
 				binary[i] = (Byte)[jumps[instruction] unsignedCharValue];
+				
+				//NSLog(@"[%i] = %@(%i)", i, instruction, binary[i]);
+				
 			}
 			else
+			{
 				binary[i] = (Byte)[instruction intValue];
+				//NSLog(@"[%i] = %@", i, instruction);
+				
+			}
 		}
 		
 		i++;
@@ -184,11 +226,11 @@
 	
 	header->magic = MAGIC;
 	header->filesize = count;
-		
+	
 	memccpy(binary, header, 1, sizeof(DBFHeader));
 	
 	/* * * * * * * */
-
+	
 	NSString *outFile = [source stringByDeletingPathExtension];
 	outFile = [outFile stringByAppendingPathExtension:@"o"];
 	
@@ -199,6 +241,7 @@
 		}
 		fclose (fout);
 	}
+	
 	
 	return outFile;
 }
