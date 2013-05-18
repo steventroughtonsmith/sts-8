@@ -1,5 +1,18 @@
+
+;COLOR_BLACK = 0,
+;COLOR_BLUE = 1,
+;COLOR_GREEN = 2,
+;COLOR_LIGHTBLUE = 4,
+;COLOR_RED = 8,
+;COLOR_PINK = 16,
+;COLOR_YELLOW = 32,
+;COLOR_WHITE = 64
+
+
 X 0
 Y 0
+LDA $VMODE_FB
+TAX
 
 loop:
 INCX
@@ -10,6 +23,8 @@ LDA $Y ; y
 PUSH
 JMP drawPixel
 B loop
+
+end:
 HLT
 
 ; void drawPixel(x, y)
@@ -21,7 +36,7 @@ POP
 ST $Y
 POP
 ST $X
-LD 219
+LD 2 ; color
 TAX
 LDA RtnAdrs
 PUSH

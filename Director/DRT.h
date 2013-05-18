@@ -9,19 +9,23 @@
 #ifndef Director_DRT_h
 #define Director_DRT_h
 
+typedef unsigned char Byte;
 
 #define COLUMNS 40
 #define ROWS 30
+#define SCREEN_WIDTH COLUMNS*16
+#define SCREEN_HEIGHT ROWS*16
+
 #define RAM_SIZE 1024
 #define STACK_SIZE 10000
 #define STARTADDR 100
 
-#define MAGIC 0xDB|0xF0<<8
+#define MAGIC 0xDBF00000
 
 typedef struct _DBFHeaderInternal
 {
-	short magic;
-	Byte filesize;
+	Byte magic;
+	int filesize;
 	Byte unused[97];
 } DBFHeaderInternal;
 
@@ -36,3 +40,14 @@ _sharedObject = block(); \
 return _sharedObject;
 
 #endif
+
+enum COLOR_PALETTE {
+	COLOR_BLACK = 0,
+	COLOR_BLUE = 1,
+	COLOR_GREEN = 2,
+	COLOR_LIGHTBLUE = 4,
+	COLOR_RED = 8,
+	COLOR_PINK = 16,
+	COLOR_YELLOW = 32,
+	COLOR_WHITE = 64
+};

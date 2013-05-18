@@ -15,6 +15,7 @@
 
 @implementation DRTMobileScreenView
 
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -40,6 +41,12 @@ NSMutableArray *charsetMap = nil;
 
 -(void)_commonInit
 {
+	videoBuffer = (uint32_t*)malloc(SCREEN_WIDTH * SCREEN_HEIGHT * 4);
+	size_t bitsPerComponent = 8;
+	size_t bytesPerPixel    = 4;
+	size_t bytesPerRow      = (SCREEN_WIDTH * bitsPerComponent * bytesPerPixel + 7) / 8;
+	
+	ctx = CGBitmapContextCreate(videoBuffer, SCREEN_WIDTH, SCREEN_HEIGHT, bitsPerComponent, bytesPerRow, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaPremultipliedLast);
 
 	[self buildFont];
 	
@@ -86,7 +93,70 @@ NSMutableArray *charsetMap = nil;
 	[charImg drawAtPoint:CGPointZero blendMode:kCGBlendModeNormal alpha:1.0];
 }
 
+- (void)drawFramebufferModeRect:(CGRect)dirtyRect
+{
+	for (int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++)
+	{
+		Byte byte = (int)[[DRTCPU sharedInstance] vram][i];
+		int palette_color = 0;
+		
+		switch (byte) {
+			case COLOR_BLACK:
+				palette_color = 0xFF000000;
+				break;
+			case COLOR_BLUE:
+				palette_color = 0xFF0000FF;
+				break;
+			case COLOR_GREEN:
+				palette_color = 0xFF00FF00;
+				break;
+			case COLOR_LIGHTBLUE:
+				palette_color = 0xFFFFFF00;
+				break;
+			case COLOR_RED:
+				palette_color = 0xFFFF0000;
+				break;
+			case COLOR_PINK:
+				palette_color = 0xFFFF00FF;
+				break;
+			case COLOR_YELLOW:
+				palette_color = 0xFF00FFFF;
+				break;
+			case COLOR_WHITE:
+				palette_color = 0xFFFFFFFF;
+				break;
+			default:
+				palette_color = 0xFF000000;
+				break;
+		}
+		
+		
+		videoBuffer[i] = palette_color;
+	}
+	
+	[[UIColor blackColor] set];
+	
+	UIRectFill(self.bounds);
+	
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGImageRef cgImage = CGBitmapContextCreateImage(ctx);
+	
+	CGContextScaleCTM(context, 1.0, -1.0);
+
+	CGContextDrawImage(context, CGRectMake(0, -SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT), cgImage);
+	CGImageRelease(cgImage);
+	
+}
+
 - (void)drawRect:(CGRect)dirtyRect
+{
+	if ([DRTCPU sharedInstance].vmode == 1)
+		[self drawFramebufferModeRect:dirtyRect];
+	else
+		[self drawCharacterModeRect:dirtyRect];
+}
+
+- (void)drawCharacterModeRect:(CGRect)dirtyRect
 {
 	Byte *vram = [[DRTCPU sharedInstance] vram];
 	

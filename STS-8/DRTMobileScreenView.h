@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DRTMobileScreenView : UIView <UIKeyInput, UITextInputTraits>
-
+{
+	CGContextRef ctx;
+	uint32_t *videoBuffer;
+}
 @end

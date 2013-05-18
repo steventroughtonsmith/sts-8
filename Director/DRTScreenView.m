@@ -12,6 +12,9 @@
 
 @implementation DRTScreenView
 
+CGContextRef ctx;
+uint32_t *videoBuffer;
+
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
@@ -45,7 +48,7 @@
 
 -(void)keyDown:(NSEvent *)theEvent
 {
-//	NSLog(@"key = %i", [theEvent.characters UTF8String][0]);
+	//	NSLog(@"key = %i", [theEvent.characters UTF8String][0]);
 	[[DRTCPU sharedInstance] setKey:[theEvent.characters UTF8String][0]];
 }
 
@@ -61,6 +64,13 @@
 
 -(void)_commonInit
 {
+	videoBuffer = (uint32_t*)malloc(SCREEN_WIDTH * SCREEN_HEIGHT * 4);
+	size_t bitsPerComponent = 8;
+	size_t bytesPerPixel    = 4;
+	size_t bytesPerRow      = (SCREEN_WIDTH * bitsPerComponent * bytesPerPixel + 7) / 8;
+	
+	ctx = CGBitmapContextCreate(videoBuffer, SCREEN_WIDTH, SCREEN_HEIGHT, bitsPerComponent, bytesPerRow, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaPremultipliedLast);
+	
 	
 	[self registerForDraggedTypes:
 	 [NSArray arrayWithObjects:NSFilenamesPboardType,nil]];
@@ -99,7 +109,71 @@
 	[charset drawAtPoint:CGPointZero fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 }
 
+- (void)drawFramebufferModeRect:(NSRect)dirtyRect
+{
+	for (int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++)
+	{
+		Byte byte = (int)[[DRTCPU sharedInstance] vram][i];
+		int palette_color = 0;
+		
+		switch (byte) {
+			case COLOR_BLACK:
+				palette_color = 0xFF000000;
+				break;
+			case COLOR_BLUE:
+				palette_color = 0xFF0000FF;
+				break;
+			case COLOR_GREEN:
+				palette_color = 0xFF00FF00;
+				break;
+			case COLOR_LIGHTBLUE:
+				palette_color = 0xFFFFFF00;
+				break;
+			case COLOR_RED:
+				palette_color = 0xFFFF0000;
+				break;
+			case COLOR_PINK:
+				palette_color = 0xFFFF00FF;
+				break;
+			case COLOR_YELLOW:
+				palette_color = 0xFF00FFFF;
+				break;
+			case COLOR_WHITE:
+				palette_color = 0xFFFFFFFF;
+				break;
+			default:
+				palette_color = 0xFF000000;
+				break;
+		}
+		
+		
+		videoBuffer[i] = palette_color;
+	}
+		
+	[[NSColor blackColor] set];
+	
+	NSRectFill(self.bounds);
+	
+	CGContextRef context = [NSGraphicsContext currentContext].graphicsPort;
+	
+	
+	CGImageRef cgImage = CGBitmapContextCreateImage(ctx);
+	
+	
+	CGContextDrawImage(context, CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), cgImage);
+	CGImageRelease(cgImage);
+	
+}
+
 - (void)drawRect:(NSRect)dirtyRect
+{
+	if ([DRTCPU sharedInstance].vmode == 1)
+		[self drawFramebufferModeRect:dirtyRect];
+	else
+		[self drawCharacterModeRect:dirtyRect];
+}
+
+- (void)drawCharacterModeRect:(NSRect)dirtyRect
 {
 	Byte *vram = [[DRTCPU sharedInstance] vram];
 	
@@ -176,6 +250,7 @@
 		
 		[[DRTCPU sharedInstance] halt];
 		
+		while (![[DRTCPU sharedInstance] halted]){}
 		
 		if ([[zPath pathExtension] isEqualToString:@"s"])
 		{
@@ -191,7 +266,6 @@
 			NSString *binaryFilePath =  [assembler _compileFile:temporaryFilePath];
 			
 			[[DRTCPU sharedInstance] load: (char *)[binaryFilePath UTF8String]];
-			
 		}
 		else
 		{

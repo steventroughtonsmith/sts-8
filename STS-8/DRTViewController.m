@@ -111,7 +111,7 @@
 	NSString *binaryFilePath =  [assembler _compileFile:temporaryFilePath];
 	
 	[[DRTCPU sharedInstance] halt];
-	[[DRTCPU sharedInstance] load:[binaryFilePath UTF8String]];
+	[[DRTCPU sharedInstance] load:(char *)[binaryFilePath UTF8String]];
 	[[DRTCPU sharedInstance] coldBoot];
 }
 

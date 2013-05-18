@@ -15,9 +15,9 @@ int main(int argc, char *argv[])
 	if (argc > 1)
 	{
 		
-		[[DRTCPU sharedInstance] halt];
-		[[DRTCPU sharedInstance] load:argv[1]];
-		[[DRTCPU sharedInstance] coldBoot];
+		//[[DRTCPU sharedInstance] halt];
+		//[[DRTCPU sharedInstance] load:argv[1]];
+		//[[DRTCPU sharedInstance] coldBoot];
 	}
 	
 	return NSApplicationMain(argc, (const char **)argv);

@@ -19,10 +19,10 @@
 		B012E0E7160760E00083CD93 /* DRTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B012E0E6160760E00083CD93 /* DRTViewController.m */; };
 		B012E0EA160760E00083CD93 /* DRTViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B012E0E8160760E00083CD93 /* DRTViewController.xib */; };
 		B012E0F11607618A0083CD93 /* DRTMobileScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B012E0F01607618A0083CD93 /* DRTMobileScreenView.m */; };
-		B012E0F2160762C40083CD93 /* DRTCPU.m in Sources */ = {isa = PBXBuildFile; fileRef = B02517F415E950320018034D /* DRTCPU.m */; };
+		B012E0F2160762C40083CD93 /* DRTCPU.mm in Sources */ = {isa = PBXBuildFile; fileRef = B02517F415E950320018034D /* DRTCPU.mm */; };
 		B012E0F41607646B0083CD93 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B012E0F31607646B0083CD93 /* QuartzCore.framework */; };
 		B012E0F51607647C0083CD93 /* charset.png in Resources */ = {isa = PBXBuildFile; fileRef = B039BF9015EC1E1400146791 /* charset.png */; };
-		B012E0F6160769180083CD93 /* DRTAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B17C4A15ECAC190069B13B /* DRTAssembler.m */; };
+		B012E0F6160769180083CD93 /* DRTAssembler.mm in Sources */ = {isa = PBXBuildFile; fileRef = B0B17C4A15ECAC190069B13B /* DRTAssembler.mm */; };
 		B012E0FA1607734D0083CD93 /* ScreenFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = B012E0F81607734D0083CD93 /* ScreenFrame.png */; };
 		B012E0FB1607734D0083CD93 /* ScreenFrame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B012E0F91607734D0083CD93 /* ScreenFrame@2x.png */; };
 		B012E0FE160775830083CD93 /* Power.png in Resources */ = {isa = PBXBuildFile; fileRef = B012E0FC160775830083CD93 /* Power.png */; };
@@ -42,17 +42,18 @@
 		B02517E715E94FD70018034D /* DRTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B02517E615E94FD70018034D /* DRTAppDelegate.m */; };
 		B02517EA15E94FD80018034D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B02517E815E94FD80018034D /* MainMenu.xib */; };
 		B02517F215E94FF70018034D /* DRTGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = B02517F115E94FF70018034D /* DRTGameView.m */; };
-		B02517F515E950320018034D /* DRTCPU.m in Sources */ = {isa = PBXBuildFile; fileRef = B02517F415E950320018034D /* DRTCPU.m */; };
+		B02517F515E950320018034D /* DRTCPU.mm in Sources */ = {isa = PBXBuildFile; fileRef = B02517F415E950320018034D /* DRTCPU.mm */; };
 		B02517FD15E967F80018034D /* helloworld.s in Resources */ = {isa = PBXBuildFile; fileRef = B02517FA15E9675E0018034D /* helloworld.s */; };
 		B03171CA15EA7B0600B75963 /* DRTScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B03171C915EA7B0600B75963 /* DRTScreenView.m */; };
 		B039BF9115EC1E1400146791 /* charset.png in Resources */ = {isa = PBXBuildFile; fileRef = B039BF9015EC1E1400146791 /* charset.png */; };
-		B08971861738B33200AE228B /* DRTCPU.m in Sources */ = {isa = PBXBuildFile; fileRef = B02517F415E950320018034D /* DRTCPU.m */; };
-		B0B17C4B15ECAC190069B13B /* DRTAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B17C4A15ECAC190069B13B /* DRTAssembler.m */; };
+		B08971861738B33200AE228B /* DRTCPU.mm in Sources */ = {isa = PBXBuildFile; fileRef = B02517F415E950320018034D /* DRTCPU.mm */; };
+		B092F381173F2E9E00647D9C /* sts8-core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B092F380173F2E9E00647D9C /* sts8-core.cpp */; };
+		B092F382173F2E9E00647D9C /* sts8-core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B092F380173F2E9E00647D9C /* sts8-core.cpp */; };
+		B092F386173F3AC400647D9C /* DRTAssembler.mm in Sources */ = {isa = PBXBuildFile; fileRef = B0B17C4A15ECAC190069B13B /* DRTAssembler.mm */; };
+		B0B17C4B15ECAC190069B13B /* DRTAssembler.mm in Sources */ = {isa = PBXBuildFile; fileRef = B0B17C4A15ECAC190069B13B /* DRTAssembler.mm */; };
 		B0B17C5415ECAC520069B13B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B17C5315ECAC520069B13B /* Foundation.framework */; };
 		B0B17C5715ECAC520069B13B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B17C5615ECAC520069B13B /* main.m */; };
 		B0B17C5B15ECAC520069B13B /* drtas.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0B17C5A15ECAC520069B13B /* drtas.1 */; };
-		B0B17C5F15ECAC7C0069B13B /* DRTAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B17C4A15ECAC190069B13B /* DRTAssembler.m */; };
-		B0B17C6015ECACCE0069B13B /* DRTCPU.m in Sources */ = {isa = PBXBuildFile; fileRef = B02517F415E950320018034D /* DRTCPU.m */; };
 		B0BB0BA5161981BB00E563D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B17C5315ECAC520069B13B /* Foundation.framework */; };
 		B0BB0BA8161981BB00E563D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0BB0BA7161981BB00E563D1 /* main.m */; };
 		B0BB0BAC161981BB00E563D1 /* drtcc.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0BB0BAB161981BB00E563D1 /* drtcc.1 */; };
@@ -138,18 +139,20 @@
 		B02517F015E94FF70018034D /* DRTGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRTGameView.h; sourceTree = "<group>"; };
 		B02517F115E94FF70018034D /* DRTGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRTGameView.m; sourceTree = "<group>"; };
 		B02517F315E950320018034D /* DRTCPU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRTCPU.h; sourceTree = "<group>"; };
-		B02517F415E950320018034D /* DRTCPU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRTCPU.m; sourceTree = "<group>"; };
+		B02517F415E950320018034D /* DRTCPU.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DRTCPU.mm; sourceTree = "<group>"; };
 		B02517FA15E9675E0018034D /* helloworld.s */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = helloworld.s; sourceTree = "<group>"; };
 		B03171C815EA7B0600B75963 /* DRTScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRTScreenView.h; sourceTree = "<group>"; };
 		B03171C915EA7B0600B75963 /* DRTScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRTScreenView.m; sourceTree = "<group>"; };
 		B039BF9015EC1E1400146791 /* charset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charset.png; sourceTree = "<group>"; };
 		B051218016090E91006227AF /* keyinput.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = keyinput.s; sourceTree = "<group>"; };
 		B07F54821644DF3D0022DFFB /* pixels.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = pixels.s; sourceTree = "<group>"; };
+		B092F380173F2E9E00647D9C /* sts8-core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "sts8-core.cpp"; sourceTree = "<group>"; };
+		B092F383173F328B00647D9C /* sts8-core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sts8-core.h"; sourceTree = "<group>"; };
 		B094DF1F16085D9F0015C088 /* alphabet.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = alphabet.s; sourceTree = "<group>"; };
 		B09F253D163509B400EFA6A1 /* snake.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = snake.s; sourceTree = "<group>"; wrapsLines = 0; };
 		B0B14B07160E896100F2894F /* stsos.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = stsos.s; sourceTree = "<group>"; };
 		B0B17C4915ECAC190069B13B /* DRTAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRTAssembler.h; sourceTree = "<group>"; };
-		B0B17C4A15ECAC190069B13B /* DRTAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRTAssembler.m; sourceTree = "<group>"; };
+		B0B17C4A15ECAC190069B13B /* DRTAssembler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DRTAssembler.mm; sourceTree = "<group>"; };
 		B0B17C5115ECAC520069B13B /* drtas */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = drtas; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B17C5315ECAC520069B13B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B0B17C5615ECAC520069B13B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -161,6 +164,7 @@
 		B0BB0BAA161981BB00E563D1 /* drtcc-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "drtcc-Prefix.pch"; sourceTree = "<group>"; };
 		B0BB0BAB161981BB00E563D1 /* drtcc.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = drtcc.1; sourceTree = "<group>"; };
 		B0E7AF951664D1ED00587C7F /* calc.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = calc.s; sourceTree = "<group>"; };
+		B0FDC1511741EA4E00D47D79 /* sts8.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sts8.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,7 +259,7 @@
 				B012E10616077B180083CD93 /* i-144.png */,
 				B012E10416077B160083CD93 /* i-72.png */,
 				B0B17C4915ECAC190069B13B /* DRTAssembler.h */,
-				B0B17C4A15ECAC190069B13B /* DRTAssembler.m */,
+				B0B17C4A15ECAC190069B13B /* DRTAssembler.mm */,
 				B02517D915E94FD70018034D /* Director */,
 				B0B17C5515ECAC520069B13B /* drtas */,
 				B012E0D3160760E00083CD93 /* STS-8 */,
@@ -309,7 +313,8 @@
 				B03171C815EA7B0600B75963 /* DRTScreenView.h */,
 				B03171C915EA7B0600B75963 /* DRTScreenView.m */,
 				B02517F315E950320018034D /* DRTCPU.h */,
-				B02517F415E950320018034D /* DRTCPU.m */,
+				B02517F415E950320018034D /* DRTCPU.mm */,
+				B092F387173F430300647D9C /* Core */,
 				B02517E815E94FD80018034D /* MainMenu.xib */,
 				B02517DA15E94FD70018034D /* Supporting Files */,
 			);
@@ -331,13 +336,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B092F387173F430300647D9C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B0FDC1511741EA4E00D47D79 /* sts8.h */,
+				B092F380173F2E9E00647D9C /* sts8-core.cpp */,
+				B092F383173F328B00647D9C /* sts8-core.h */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
 		B094DF1D16085D7C0015C088 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
 				B02517FA15E9675E0018034D /* helloworld.s */,
+				B0B14B07160E896100F2894F /* stsos.s */,
 				B094DF1F16085D9F0015C088 /* alphabet.s */,
 				B051218016090E91006227AF /* keyinput.s */,
-				B0B14B07160E896100F2894F /* stsos.s */,
 				B0E7AF951664D1ED00587C7F /* calc.s */,
 				B09F253D163509B400EFA6A1 /* snake.s */,
 				B07F54821644DF3D0022DFFB /* pixels.s */,
@@ -549,8 +564,9 @@
 				B012E0DE160760E00083CD93 /* DRTAppDelegate.m in Sources */,
 				B012E0E7160760E00083CD93 /* DRTViewController.m in Sources */,
 				B012E0F11607618A0083CD93 /* DRTMobileScreenView.m in Sources */,
-				B012E0F2160762C40083CD93 /* DRTCPU.m in Sources */,
-				B012E0F6160769180083CD93 /* DRTAssembler.m in Sources */,
+				B012E0F2160762C40083CD93 /* DRTCPU.mm in Sources */,
+				B012E0F6160769180083CD93 /* DRTAssembler.mm in Sources */,
+				B092F382173F2E9E00647D9C /* sts8-core.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,9 +577,10 @@
 				B02517E015E94FD70018034D /* main.m in Sources */,
 				B02517E715E94FD70018034D /* DRTAppDelegate.m in Sources */,
 				B02517F215E94FF70018034D /* DRTGameView.m in Sources */,
-				B02517F515E950320018034D /* DRTCPU.m in Sources */,
+				B02517F515E950320018034D /* DRTCPU.mm in Sources */,
 				B03171CA15EA7B0600B75963 /* DRTScreenView.m in Sources */,
-				B0B17C4B15ECAC190069B13B /* DRTAssembler.m in Sources */,
+				B0B17C4B15ECAC190069B13B /* DRTAssembler.mm in Sources */,
+				B092F381173F2E9E00647D9C /* sts8-core.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,8 +589,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B17C5715ECAC520069B13B /* main.m in Sources */,
-				B0B17C5F15ECAC7C0069B13B /* DRTAssembler.m in Sources */,
-				B0B17C6015ECACCE0069B13B /* DRTCPU.m in Sources */,
+				B092F386173F3AC400647D9C /* DRTAssembler.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,7 +598,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0BB0BA8161981BB00E563D1 /* main.m in Sources */,
-				B08971861738B33200AE228B /* DRTCPU.m in Sources */,
+				B08971861738B33200AE228B /* DRTCPU.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
